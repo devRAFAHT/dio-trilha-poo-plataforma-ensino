@@ -37,6 +37,38 @@ public class Dev {
                 .sum();*/
     }
 
+    public void relatorioXp(){
+        Map<String, Double> xpPorConteudo = new HashMap();
+
+        for(Conteudo conteudo : conteudosConcluidos){
+            xpPorConteudo.put(conteudo.getTitulo(), conteudo.calcularXp());
+        }
+
+        System.out.println("Relatório de XP por conteúdo:");
+        for (Map.Entry<String, Double> entry : xpPorConteudo.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue() + " xp");
+        }
+    }
+
+    public void comentarConteudoConcluido(){
+        for(Conteudo conteudo : conteudosConcluidos){
+            System.out.println(conteudo.getTitulo() + "\nDescrição: " + conteudo.getDescricao() + "\n");
+        }
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Insira o nome do curso que deseja adicionar um comentário: ");
+        String nome = sc.nextLine();
+
+        for(Conteudo conteudo : conteudosConcluidos){
+            if(conteudo.getTitulo().equals(nome)){
+                System.out.println("Escreva o seu comentário: ");
+                String comentario = sc.nextLine();
+                conteudo.getComentarios().put(this.nome, comentario);
+            }
+        }
+
+    }
+
 
     public String getNome() {
         return nome;
