@@ -51,22 +51,33 @@ public class Dev {
     }
 
     public void comentarConteudoConcluido(){
+        boolean nomeValido = false;
+
+        System.out.println("\nLista de cursos concluídos:\n");
         for(Conteudo conteudo : conteudosConcluidos){
             System.out.println(conteudo.getTitulo() + "\nDescrição: " + conteudo.getDescricao() + "\n");
         }
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Insira o nome do curso que deseja adicionar um comentário: ");
-        String nome = sc.nextLine();
 
-        for(Conteudo conteudo : conteudosConcluidos){
-            if(conteudo.getTitulo().equals(nome)){
-                System.out.println("Escreva o seu comentário: ");
-                String comentario = sc.nextLine();
-                conteudo.getComentarios().put(this.nome, comentario);
+        do{
+            System.out.println("Insira o nome do curso da lista que deseja adicionar um comentário: ");
+            String nome = sc.nextLine();
+
+            for(Conteudo conteudo : conteudosConcluidos){
+                if(conteudo.getTitulo().equals(nome)){
+                    nomeValido = true;
+                    System.out.println("Escreva o seu comentário: ");
+                    String comentario = sc.nextLine();
+                    conteudo.getComentarios().put(this.nome, comentario);
+                }
             }
-        }
 
+            if (!nomeValido) {
+                System.out.println("Esse curso não está na lista de concluídos.");
+            }
+
+        }while(!nomeValido);
     }
 
 
